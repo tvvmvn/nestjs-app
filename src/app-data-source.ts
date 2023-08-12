@@ -6,7 +6,7 @@ export const AppDataSource = new DataSource({
   port: 3306,
   username: "root",
   password: "123",
-  database: "instagram_clone_master",
+  database: "nestjs_app",
   entities: ['dist/src/**/*.entity.js'],
   migrations: ["dist/migrations/*.js"],
   synchronize: true,
