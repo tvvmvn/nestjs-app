@@ -1,5 +1,5 @@
 import {
-  IsInt,
+  IsInt
 } from "class-validator";
 
 export interface Cat {
