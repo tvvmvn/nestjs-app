@@ -1,13 +1,15 @@
-import { PrimaryGeneratedColumn } from "typeorm";
-import { IsNotEmpty } from "class-validator";
+import { PrimaryGeneratedColumn, Column } from "typeorm";
 
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @IsNotEmpty()
+  @Column()
   username: string;
 
-  @IsNotEmpty()
+  @Column()
   password: string;
+
+  @Column()
+  name: string;
 }
