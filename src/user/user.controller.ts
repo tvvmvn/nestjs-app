@@ -6,7 +6,8 @@ import {
   UseGuards,
   UseInterceptors, 
   UploadedFile,
-  HttpException, HttpStatus, UnauthorizedException
+  UseFilters,
+  HttpException, HttpStatus, UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -16,6 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
+import { HttpExceptionFilter } from 'src/common/http-exception.filter';
 
 @Controller('user')
 @UsePipes(new ValidationPipe()) // Controller level
@@ -23,10 +25,12 @@ export class UserController {
   constructor (private jwtService: JwtService) {}
   
   @Get() 
+  @UseFilters(new HttpExceptionFilter())
   hello() {
-    return 'hello user'
+    // throw new Error(); // Not an instance of HttpException class.
+    throw new UnauthorizedException() // An instance of HttpException class
   }
-
+  
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     return { createUserDto }
